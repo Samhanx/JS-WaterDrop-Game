@@ -1,3 +1,4 @@
 import Game from './scripts/Game.js'
 
-console.log(Game)
+Game.wrapper = document.querySelector('#wrapper')
+Game.start()
