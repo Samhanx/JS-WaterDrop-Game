@@ -29,7 +29,20 @@ export default class {
 
   move() {
     this.timer = setInterval(() => {
-      this.left -= 3
+      switch (this.direction) {
+        case 'left':
+          this.left -= this.speed
+          break
+        case 'right':
+          this.left += this.speed
+          break
+        case 'top':
+          this.top -= this.speed
+          break
+        case 'bottom':
+          this.top += this.speed
+          break
+      }
       this.setPosition(this.left, this.top)
       typeof this.onMove === 'function' && this.onMove()
     }, 16)

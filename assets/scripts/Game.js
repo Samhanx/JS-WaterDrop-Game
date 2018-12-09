@@ -41,21 +41,27 @@ export default {
             if (collidedWaterDrop) {
               // 碰撞销毁
               this.destroy()
+              game.bullets = game.bullets.filter(bullet => bullet !== this)
+              collidedWaterDrop.levelUp()
             } else if (this.left < -this.width || this.left > game.boardWrapper.offsetWidth || this.top < -this.height || this.top > game.boardWrapper.offsetHeight) {
               // 超出左边 this.left < -this.width, 超出右边 this.left > game.boardWrapper.offsetWidth
               // 超出上边 this.top < -this.height, 超出下边 this.top > game.boardWrapper.offsetHeight
               this.destroy()
+              game.bullets = game.bullets.filter(bullet => bullet !== this)
             }
           }
 
-          let bulletLeft = new Bullet({
-            direction: 'left',
-            speed: 3,
-            onMove,
+          let directions = ['left', 'top', 'right', 'bottom']
+          directions.forEach(direction => {
+            let buttet = new Bullet({
+              direction,
+              speed: 3,
+              onMove,
+            })
+            game.bullets.push(buttet)
+            buttet.draw(game.boardWrapper)
+            buttet.setPosition(this.left, this.top)
           })
-          game.bullets.push(bulletLeft)
-          bulletLeft.draw(game.boardWrapper)
-          bulletLeft.setPosition(this.left, this.top)
         },
       })
 
