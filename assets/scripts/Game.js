@@ -46,6 +46,9 @@ export default {
           this.destroy()
           game.bullets = game.bullets.filter(bullet => bullet !== this)
         }
+        if (game.bullets.length === 0) {
+          game._checkGame()
+        }
       }
 
       let directions = ['left', 'top', 'right', 'bottom']
@@ -69,6 +72,15 @@ export default {
       })
       game.waterDrops.push(waterDrop)
       waterDrop.draw(game.boardWrapper)
+    }
+  },
+
+  _checkGame() {
+    const waterDropsLeft = this.waterDrops.filter(waterDrop => waterDrop.level > 0)
+    if (this.life >= 0 && waterDropsLeft.length === 0) {
+      return alert('You Win!')
+    } else if (this.life === 0) {
+      return alert('Game Over!')
     }
   },
 
