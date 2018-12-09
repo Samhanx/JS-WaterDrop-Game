@@ -1,9 +1,10 @@
 export default class {
-  constructor(level) {
+  constructor(options) {
     this.container = null
     this.drop = null
-    this.level = level
-    this.handleClick = null
+    this.level = options.level
+    this.onClick = options.onClick
+    this.onBoom = null
   }
 
   draw(wrapper) {
@@ -17,7 +18,7 @@ export default class {
       this.container.appendChild(this.drop)
     }
     this.drop.addEventListener('click', () => {
-      typeof this.handleClick === 'function' && this.handleClick()
+      typeof this.onClick === 'function' && this.onClick()
     })
     
     wrapper.appendChild(this.container)
