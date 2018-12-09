@@ -87,7 +87,8 @@ body {
   height: 80px;
   cursor: pointer;
 }
-.water-drop:hover {
+.water-drop:hover,
+.level-up {
   animation: shake .8s 1 ease-in;
   transform-origin: top left;
 }

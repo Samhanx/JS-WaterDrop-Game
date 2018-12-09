@@ -24,6 +24,10 @@ export default class {
     this._drop.addEventListener('click', () => {
       typeof this.onClick === 'function' && this.onClick()
     })
+
+    this._drop.addEventListener('animationend', ()=> {
+      this._drop.classList.remove('level-up')
+    })
     
     wrapper.appendChild(this._container)
     this.left = this._container.offsetLeft
@@ -36,8 +40,8 @@ export default class {
       typeof this.onBoom === 'function' && this.onBoom()
     } else {
       this.level++
-    }
-    
+      this._drop.classList.add('level-up')
+    }    
     this._drop.src = `/assets/images/${this.level}.png`
   }
 }
