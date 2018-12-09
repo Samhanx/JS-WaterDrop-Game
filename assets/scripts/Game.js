@@ -39,6 +39,9 @@ export default {
         game._setGameLifeDisplay()
         this.levelUp()
       }
+      if (game.life === 0 && game.bullets.length === 0) {
+        setTimeout(game._checkGame.bind(game), 50)
+      }
     }
   },
 
@@ -83,8 +86,8 @@ export default {
   },
 
   _checkGame() {
-    const waterDropsLeft = this.waterDrops.filter(waterDrop => waterDrop.level > 0)
-    if (this.life >= 0 && waterDropsLeft.length === 0) {
+    const waterDropsLeft = this.waterDrops.every(waterDrop => waterDrop.level > 0)
+    if (this.life >= 0 && waterDropsLeft) {
       return alert('You Win!')
     } else if (this.life === 0) {
       return alert('Game Over!')
