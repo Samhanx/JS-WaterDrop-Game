@@ -4,6 +4,8 @@ export default class {
     this._drop = null
     this.left = 0
     this.top = 0
+    this.width = 100
+    this.height = 100
     this.level = options.level
     this.onClick = options.onClick
     this.onBoom = options.onBoom

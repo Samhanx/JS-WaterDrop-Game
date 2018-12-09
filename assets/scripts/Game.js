@@ -12,13 +12,17 @@ export default {
 
   waterWrapper: null,
 
+  waterDrops: [],
+
+  bullets: [],
+
   start() {
     if (!this.boardWrapper || !this.countWrapper || !this.waterWrapper) throw new Error('DOM Container does not initialized for Game!')
-    const game = this
+    let game = this
     game._setGameLifeDisplay()
 
     for (let i = 0; i < 36; i++) {
-      const waterDrop = new WaterDrop({
+      let waterDrop = new WaterDrop({
         level: game._getRandomGameSeed(),
         onClick() {
           if (game.life > 0) {
@@ -28,15 +32,34 @@ export default {
           }
         },
         onBoom() {
-          const bullet = new Bullet({
-            onMove() {
-              
+          let self = this
+          const onMove = function() {
+            let canCollideWaterDrops = game.waterDrops.filter(waterDrop => {
+              return waterDrop.level > 0 && waterDrop !== self
+            })
+            let collidedWaterDrop = this.checkCollision(canCollideWaterDrops)
+            if (collidedWaterDrop) {
+              // 碰撞销毁
+              this.destroy()
+            } else if (this.left < -this.width || this.left > game.boardWrapper.offsetWidth || this.top < -this.height || this.top > game.boardWrapper.offsetHeight) {
+              // 超出左边 this.left < -this.width, 超出右边 this.left > game.boardWrapper.offsetWidth
+              // 超出上边 this.top < -this.height, 超出下边 this.top > game.boardWrapper.offsetHeight
+              this.destroy()
             }
+          }
+
+          let bulletLeft = new Bullet({
+            direction: 'left',
+            speed: 3,
+            onMove,
           })
-          bullet.draw(game.boardWrapper)
-          bullet.setPosition(this.left, this.top)
+          game.bullets.push(bulletLeft)
+          bulletLeft.draw(game.boardWrapper)
+          bulletLeft.setPosition(this.left, this.top)
         },
       })
+
+      game.waterDrops.push(waterDrop)
       waterDrop.draw(game.boardWrapper)
     }
   },
