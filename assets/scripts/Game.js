@@ -5,13 +5,24 @@ export default {
 
   life: 10,
 
-  wrapper: null,
+  boardWrapper: null,
+
+  countWrapper: null,
 
   start() {
-    if (!this.wrapper) throw new Error('No DOM Container for Game Board!')
+    if (!this.boardWrapper || !this.countWrapper) throw new Error('DOM Container does not initialized for Game!')
+    this.countWrapper.textContent = this.life
+
     for (let i = 0; i < 36; i++) {
       const waterDrop = new WaterDrop(this._getRandomGameSeed())
-      waterDrop.draw(this.wrapper)
+      waterDrop.draw(this.boardWrapper)
+      waterDrop.handleClick = () => {
+        if (this.life > 0) {
+          this.life--
+          waterDrop.levelUp()
+          this.countWrapper.textContent = this.life
+        }
+      }
     }
   },
 

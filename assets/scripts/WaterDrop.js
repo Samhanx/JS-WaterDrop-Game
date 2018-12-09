@@ -3,6 +3,7 @@ export default class {
     this.container = null
     this.drop = null
     this.level = level
+    this.handleClick = null
   }
 
   draw(wrapper) {
@@ -11,10 +12,13 @@ export default class {
     this.container.classList.add('water-drop-box')
     this.drop.classList.add('water-drop')
     this.drop.src = `/assets/images/${this.level}.png`
+
     this.drop.onload = () => {
       this.container.appendChild(this.drop)
     }
-    this.drop.onclick = this.levelUp.bind(this)
+    this.drop.addEventListener('click', () => {
+      typeof this.handleClick === 'function' && this.handleClick()
+    })
     
     wrapper.appendChild(this.container)
   }

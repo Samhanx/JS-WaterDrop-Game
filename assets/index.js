@@ -1,4 +1,5 @@
 import Game from './scripts/Game.js'
 
-Game.wrapper = document.querySelector('#wrapper')
+Game.boardWrapper = document.querySelector('#wrapper')
+Game.countWrapper = document.querySelector('#life-count')
 Game.start()
