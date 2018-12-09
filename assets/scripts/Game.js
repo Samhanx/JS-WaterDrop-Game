@@ -1,4 +1,5 @@
 import WaterDrop from './WaterDrop.js'
+import Bullet from './Bullet.js';
 
 export default {
   name: 'Game',
@@ -25,7 +26,16 @@ export default {
             game._setGameLifeDisplay()
             this.levelUp()
           }
-        }
+        },
+        onBoom() {
+          const bullet = new Bullet({
+            onMove() {
+              
+            }
+          })
+          bullet.draw(game.boardWrapper)
+          bullet.setPosition(this.left, this.top)
+        },
       })
       waterDrop.draw(game.boardWrapper)
     }

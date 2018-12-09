@@ -1,36 +1,41 @@
 export default class {
   constructor(options) {
-    this.container = null
-    this.drop = null
+    this._container = null
+    this._drop = null
+    this.left = 0
+    this.top = 0
     this.level = options.level
     this.onClick = options.onClick
-    this.onBoom = null
+    this.onBoom = options.onBoom
   }
 
   draw(wrapper) {
-    this.container = document.createElement('div')
-    this.drop = new Image()
-    this.container.classList.add('water-drop-box')
-    this.drop.classList.add('water-drop')
-    this.drop.src = `/assets/images/${this.level}.png`
+    this._container = document.createElement('div')
+    this._drop = new Image()
+    this._container.classList.add('water-drop-box')
+    this._drop.classList.add('water-drop')
+    this._drop.src = `/assets/images/${this.level}.png`
 
-    this.drop.onload = () => {
-      this.container.appendChild(this.drop)
+    this._drop.onload = () => {
+      this._container.appendChild(this._drop)
     }
-    this.drop.addEventListener('click', () => {
+    this._drop.addEventListener('click', () => {
       typeof this.onClick === 'function' && this.onClick()
     })
     
-    wrapper.appendChild(this.container)
+    wrapper.appendChild(this._container)
+    this.left = this._container.offsetLeft
+    this.top = this._container.offsetTop
   }
 
   levelUp() {
     if (this.level === 4) {
       this.level = 0
+      typeof this.onBoom === 'function' && this.onBoom()
     } else {
       this.level++
     }
     
-    this.drop.src = `/assets/images/${this.level}.png`
+    this._drop.src = `/assets/images/${this.level}.png`
   }
 }
