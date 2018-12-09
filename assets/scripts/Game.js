@@ -10,8 +10,12 @@ export default {
   start() {
     if (!this.wrapper) throw new Error('No DOM Container for Game Board!')
     for (let i = 0; i < 36; i++) {
-      const waterDrop = new WaterDrop()
+      const waterDrop = new WaterDrop(this._getRandomGameSeed())
       waterDrop.draw(this.wrapper)
     }
+  },
+
+  _getRandomGameSeed() {
+    return Math.floor(Math.random() * 5)
   }
 }

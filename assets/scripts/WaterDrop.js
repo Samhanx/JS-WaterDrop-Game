@@ -1,7 +1,8 @@
 export default class {
-  constructor() {
+  constructor(level) {
     this.div = null
     this.img = null
+    this.level = level
   }
 
   draw(wrapper) {
@@ -9,7 +10,7 @@ export default class {
     this.img = new Image()
     this.div.classList.add('water-drop-box')
     this.img.classList.add('water-drop')
-    this.img.src = `/assets/images/3.png`
+    this.img.src = `/assets/images/${this.level}.png`
     this.img.onload = () => {
       this.div.appendChild(this.img)
     }
