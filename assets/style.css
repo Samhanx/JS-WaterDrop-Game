@@ -96,7 +96,7 @@ body {
   position: absolute;
   width: 100px;
   height: 100px;
-  background: url('./images/bullet.png') no-repeat;
+  background: url('./assets/images/bullet.png') no-repeat;
   background-size: cover;
 }
 .water-bullet.left {
