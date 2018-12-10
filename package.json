@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "homepage": "https://Samhanx.github.io/JS-WaterDrop-Game",
   "scripts": {
-    "start": "cd game && http-server"
+    "start": "cd game && http-server",
+    "deploy": "gh-pages -d game"
   },
   "keywords": [],
   "author": "",
@@ -12,5 +14,7 @@
   "dependencies": {
     "http-server": "^0.11.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "gh-pages": "^2.0.1"
+  }
 }
