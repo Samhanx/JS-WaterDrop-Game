@@ -87,7 +87,7 @@ export default {
 
   _checkGame() {
     const waterDropsLeft = this.waterDrops.every(waterDrop => waterDrop.level > 0)
-    if (this.life >= 0 && waterDropsLeft) {
+    if (this.life >= 0 && !waterDropsLeft) {
       return alert('You Win!')
     } else if (this.life === 0) {
       return alert('Game Over!')
